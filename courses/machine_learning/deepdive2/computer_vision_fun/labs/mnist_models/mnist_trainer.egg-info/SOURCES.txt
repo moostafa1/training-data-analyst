@@ -1,0 +1,10 @@
+setup.py
+mnist_trainer.egg-info/PKG-INFO
+mnist_trainer.egg-info/SOURCES.txt
+mnist_trainer.egg-info/dependency_links.txt
+mnist_trainer.egg-info/top_level.txt
+trainer/__init__.py
+trainer/model.py
+trainer/task.py
+trainer/test.py
+trainer/util.py
