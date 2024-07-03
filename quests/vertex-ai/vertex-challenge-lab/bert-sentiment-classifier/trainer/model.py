@@ -80,11 +80,15 @@ def build_text_classifier(hparams, optimizer):
       model(tf.keras.Model): A compiled TensorFlow model.
     """
     text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name='text')
-    # TODO: Add a hub.KerasLayer for BERT text preprocessing.
-    preprocessor = hub.KerasLayer(hparams['tfhub-bert-preprocessor'], name='preprocessing')
+    # TODO: Add a hub.KerasLayer for BERT text preprocessing using the hparams dict. 
+    # Name the layer 'preprocessing' and store in the variable 'preprocessor'.
+    preprocessor = hub.KerasLayer(hparams['tfhub-bert-preprocessor'],name='preprocessing')
+      
     encoder_inputs = preprocessor(text_input)
-    # TODO: Add a hub.KerasLayer for BERT text encoding.
+    # TODO: Add a trainable hub.KerasLayer for BERT text encoding using the hparams dict.
+    # Name the layer 'BERT_encoder' and store in the variable 'encoder'.
     encoder = hub.KerasLayer(hparams['tfhub-bert-encoder'], trainable=True, name='BERT_encoder')
+      
     outputs = encoder(encoder_inputs)
     # For the fine-tuning you are going to use the `pooled_output` array which represents 
     # each input sequence as a whole. The shape is [batch_size, H]. 
@@ -93,7 +97,7 @@ def build_text_classifier(hparams, optimizer):
     # Add dropout to prevent overfitting during model fine-tuning.
     classifier = tf.keras.layers.Dropout(hparams['dropout'], name='dropout')(classifier)
     classifier = tf.keras.layers.Dense(1, activation=None, name='classifier')(classifier)
-    model = tf.keras.Model(text_input, classifier)
+    model = tf.keras.Model(text_input, classifier, name='bert-sentiment-classifier')
     
     loss = tf.keras.losses.BinaryCrossentropy(from_logits=True)
     metrics = tf.metrics.BinaryAccuracy()    

@@ -1,5 +1,5 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'us-central1-docker.pkg.dev/dougkelly-vertex-demos/bert-sentiment-classifier/bert-sentiment-classifier:latest', '.' ]
+  args: [ 'build', '-t', 'us-west1-docker.pkg.dev/qwiklabs-gcp-03-3f208bb2c41f/bert-sentiment-classifier/bert-sentiment-classifier:latest', '.' ]
 images: 
-- 'us-central1-docker.pkg.dev/dougkelly-vertex-demos/bert-sentiment-classifier/bert-sentiment-classifier:latest'
+- 'us-west1-docker.pkg.dev/qwiklabs-gcp-03-3f208bb2c41f/bert-sentiment-classifier/bert-sentiment-classifier:latest'
